@@ -60,12 +60,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Get last publish SHA
-      id: last-publish
-      run: Tools/actions_get_last_publish_sha.py
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Update changelog
       run: |
         dotnet tool install --global SpaceWizards.ChangelogTool --version 1.0.8
@@ -76,7 +70,7 @@ jobs:
         CHANGELOG_REPO_PATH: Resources/Changelog
         EXTRA_CATEGORIES: Admin,Maps,Rules
         GITHUB_TOKEN: ${{ secrets.CL_ACCESS_TOKEN }}
-        LAST_PUBLISH_SHA: ${{ steps.last-publish.outputs.last_publish_sha }}
+        LAST_PUBLISH_SHA: 38e0c2abddeeca2ebac234891be7c1a555a1a677
 
     - name: Commit and push changelog changes
       id: changelog
